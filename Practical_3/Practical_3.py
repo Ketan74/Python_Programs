@@ -37,22 +37,20 @@
 # ***** SOLUTION ***** #
 # ----------------------------------------------------------------------------------------------------------------------
 members_per_group = int(input())        # Taking value of K
-room_numbers = [int(item) for item in input().split()]      # Taking list of room numbers
+lst = input().split()         # Taking input in a list
+room_numbers = {}      # crated dictionary key = room number and value = occurrence of that number
 check = 0       # Flag variable
 i = 0
 # ----------------------------------------------------------------------------------------------------------------------
-while i < len(room_numbers):
-    j = 0
+for item in lst:
+    if int(item) in room_numbers.keys():    # If key exist in dictionary then increasing value of that key by 1
+        room_numbers[int(item)] = room_numbers.get(int(item)) + 1
+    else:       # If key is not exist then inserting that key and value of that key initializing by 1
+        room_numbers[int(item)] = 1
 
-    while j < len(room_numbers):                                # For finding                   V
-        if i != j and room_numbers[i] == room_numbers[j]:       # same room number              |
-            check = 1                                           # exist in list or not          V
-            break                                               # if exist then value           |
-        j += 1                                                  # of check variable = 1         V
 
-    if check == 0:                          # If check = 0 it means                         |
-        print(room_numbers[i], end='')      # ith room number is not repeating in list      |
-        break                               # so ith room number is captain's room number   V
-    check = 0
-    i += 1
+for key in room_numbers:
+    if room_numbers.get(key) == 1:      # If any key is having value 1 is a room number of captain
+        print(key)          # Printing Room Number of Captain
+        break
 # ----------------------------------------------------------------------------------------------------------------------
